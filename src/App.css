@@ -84,6 +84,7 @@ body {
   background-color: var(--verde-fondo);
   border-right: 1px solid var(--gris-claro);
   padding: 20px 12px;
+  transition: width 0.2s ease;
 }
 
 .ad-sidebar__lista {
@@ -129,6 +130,11 @@ body {
 .ad-app__contenido {
   flex: 1;
   padding: 24px 32px;
+}
+
+.ad-panel {
+  display: flex;
+  flex-direction: column;
 }
 
 .ad-panel__titulo {
@@ -293,12 +299,22 @@ body {
   background-color: var(--verde-medio);
 }
 
+/* ---------- Fila formulario + vista previa (ocupa el ancho disponible) ---------- */
+.ad-fila-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 8px;
+}
+
 /* ---------- Formularios (Login / Registro) ---------- */
 .ad-formulario {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  max-width: 360px;
+  flex: 1 1 340px;
+  max-width: 420px;
   background-color: var(--blanco);
   padding: 20px;
   border-radius: var(--radio);
@@ -344,6 +360,139 @@ body {
 
 .ad-boton-primario:hover {
   background-color: var(--verde-medio);
+}
+
+/* ---------- Sidebar: colapso (Actividad 4) ---------- */
+.ad-sidebar__toggle {
+  width: 100%;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: var(--radio);
+  background-color: var(--verde-claro);
+  color: var(--verde-oscuro);
+  font-weight: 700;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.ad-sidebar--colapsado {
+  width: 64px;
+}
+
+.ad-sidebar--colapsado .ad-sidebar__boton {
+  justify-content: center;
+}
+
+/* ---------- Switch (checkbox estilizado) ---------- */
+.ad-formulario__switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--gris-texto);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ad-formulario__switch input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--verde-medio);
+  cursor: pointer;
+}
+
+/* ---------- Vista previa en vivo (Actividad 4) ---------- */
+.ad-vista-previa {
+  flex: 1 1 300px;
+  max-width: 420px;
+  align-self: stretch;
+  background-color: var(--verde-fondo);
+  border: 1px dashed var(--verde-claro);
+  border-radius: var(--radio);
+  padding: 14px 18px;
+  font-size: 0.88rem;
+}
+
+.ad-vista-previa__titulo {
+  margin: 0 0 8px;
+  color: var(--verde-oscuro);
+  font-size: 0.9rem;
+}
+
+.ad-vista-previa p {
+  margin: 4px 0;
+}
+
+.ad-vista-previa__exito {
+  color: var(--verde-medio);
+  font-weight: 700;
+}
+
+/* ---------- Buscadores y filtros (Actividad 4) ---------- */
+.ad-buscador,
+.ad-selector {
+  font: inherit;
+  padding: 9px 12px;
+  border: 1px solid var(--gris-claro);
+  border-radius: var(--radio);
+  background-color: var(--blanco);
+  color: var(--gris-texto);
+  margin-bottom: 16px;
+}
+
+.ad-buscador {
+  width: 100%;
+  max-width: 320px;
+}
+
+.ad-buscador:focus,
+.ad-selector:focus {
+  outline: 2px solid var(--verde-medio);
+  outline-offset: 1px;
+}
+
+.ad-filtros {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Contador en CardAccion (Actividad 4) ---------- */
+.ad-card-accion__contador {
+  font-size: 0.75rem;
+  color: var(--verde-medio);
+  font-weight: 700;
+}
+
+/* ---------- Accesibilidad: foco visible por teclado ---------- */
+.ad-sidebar__boton:focus-visible,
+.ad-sidebar__toggle:focus-visible,
+.ad-card-accion__boton:focus-visible,
+.ad-boton-primario:focus-visible {
+  outline: 2px solid var(--dorado);
+  outline-offset: 2px;
+}
+
+/* ---------- Responsivo: sidebar apilado en pantallas chicas ---------- */
+@media (max-width: 720px) {
+  .ad-app__cuerpo {
+    flex-direction: column;
+  }
+
+  .ad-sidebar,
+  .ad-sidebar--colapsado {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--gris-claro);
+  }
+
+  .ad-sidebar--colapsado .ad-sidebar__boton {
+    justify-content: flex-start;
+  }
+
+  .ad-app__contenido {
+    padding: 20px;
+  }
 }
 
 /* ---------- Footer ---------- */

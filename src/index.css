@@ -1,0 +1,38 @@
+/* ================================================
+   Reseteo base del documento.
+   Los colores, tipografías y estilos de marca de
+   AgroDirecto viven en App.css (paleta "Cosecha").
+   Este archivo solo prepara el lienzo: sin ancho fijo,
+   sin acento morado de la plantilla de Vite, sin modo
+   oscuro automático que pise la identidad de marca.
+   ================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  margin: 0;
+}
