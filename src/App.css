@@ -233,6 +233,119 @@ body {
   font-size: 1.05rem;
 }
 
+/* ---------- Etiquetas de Inventario ---------- */
+.ad-etiqueta--inv-disponible {
+  background-color: var(--verde-medio);
+}
+
+.ad-etiqueta--inv-bajo {
+  background-color: var(--dorado);
+}
+
+.ad-etiqueta--inv-agotado {
+  background-color: var(--rojo, #B23A2E);
+}
+
+/* ---------- CardAccion (componente hijo reutilizable) ---------- */
+.ad-cards-accion {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.ad-card-accion {
+  background-color: var(--verde-fondo);
+  border: 1px solid var(--verde-claro);
+  border-radius: var(--radio);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ad-card-accion__titulo {
+  margin: 0;
+  color: var(--verde-oscuro);
+  font-size: 1rem;
+}
+
+.ad-card-accion__descripcion {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b6558;
+  flex: 1;
+}
+
+.ad-card-accion__boton {
+  align-self: flex-start;
+  border: none;
+  border-radius: var(--radio);
+  padding: 8px 16px;
+  background-color: var(--dorado);
+  color: var(--blanco);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.ad-card-accion__boton:hover {
+  background-color: var(--verde-medio);
+}
+
+/* ---------- Formularios (Login / Registro) ---------- */
+.ad-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 360px;
+  background-color: var(--blanco);
+  padding: 20px;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-card);
+}
+
+.ad-formulario__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--gris-texto);
+  font-weight: 600;
+}
+
+.ad-formulario__campo input,
+.ad-formulario__campo select {
+  font: inherit;
+  padding: 9px 10px;
+  border: 1px solid var(--gris-claro);
+  border-radius: var(--radio);
+  background-color: var(--papel);
+  color: var(--gris-texto);
+}
+
+.ad-formulario__campo input:focus,
+.ad-formulario__campo select:focus {
+  outline: 2px solid var(--verde-medio);
+  outline-offset: 1px;
+}
+
+.ad-boton-primario {
+  align-self: flex-start;
+  border: none;
+  border-radius: var(--radio);
+  padding: 10px 20px;
+  background-color: var(--verde-oscuro);
+  color: var(--blanco);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.ad-boton-primario:hover {
+  background-color: var(--verde-medio);
+}
+
 /* ---------- Footer ---------- */
 .ad-footer {
   background-color: var(--verde-oscuro);
