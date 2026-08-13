@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import CardAccion from './CardAccion';
 
 interface Producto {
   id: number;
@@ -8,18 +8,24 @@ interface Producto {
   unidad: string;
 }
 
-const productosIniciales: Producto[] = [
+// Datos estáticos: sin useState
+const productos: Producto[] = [
   { id: 1, nombre: 'Aguacate Hass', categoria: 'Frutas', precio: 3200, unidad: 'kg' },
   { id: 2, nombre: 'Papa Criolla', categoria: 'Tubérculos', precio: 2100, unidad: 'kg' },
   { id: 3, nombre: 'Café Excelso', categoria: 'Granos', precio: 15800, unidad: 'kg' },
 ];
 
+function formatearPrecio(valor: number): string {
+  return valor.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
+}
+
+// Función del padre (Productos) que el hijo (CardAccion) invoca al interactuar
+function manejarAccionProductos(mensaje: string) {
+  alert(`Módulo: Productos\n${mensaje}`);
+  console.log(`[Productos] ${mensaje}`);
+}
+
 function Productos() {
-  const [productos] = useState<Producto[]>(productosIniciales);
-
-  const formatearPrecio = (valor: number) =>
-    valor.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
-
   return (
     <section className="ad-panel">
       <h2 className="ad-panel__titulo">Productos</h2>
@@ -37,6 +43,21 @@ function Productos() {
             </p>
           </article>
         ))}
+      </div>
+
+      <div className="ad-cards-accion">
+        <CardAccion
+          titulo="Nuevo producto"
+          descripcion="Publicar un nuevo producto en el catálogo."
+          textoBoton="Publicar"
+          onEjecutar={manejarAccionProductos}
+        />
+        <CardAccion
+          titulo="Actualizar precios"
+          descripcion="Sincronizar precios con el último reporte de mercado."
+          textoBoton="Actualizar"
+          onEjecutar={manejarAccionProductos}
+        />
       </div>
     </section>
   );

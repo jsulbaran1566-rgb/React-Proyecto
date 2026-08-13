@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import CardAccion from './CardAccion';
 
 interface Usuario {
   id: number;
@@ -7,15 +7,21 @@ interface Usuario {
   rol: 'Productor' | 'Comprador' | 'Administrador';
 }
 
-const usuariosIniciales: Usuario[] = [
+// Datos estáticos: sin useState, ya que no cambian dentro del componente
+const usuarios: Usuario[] = [
   { id: 1, nombre: 'Carlos Ramírez', correo: 'carlos@agrodirecto.com', rol: 'Productor' },
   { id: 2, nombre: 'Laura Gómez', correo: 'laura@agrodirecto.com', rol: 'Comprador' },
   { id: 3, nombre: 'Andrea Torres', correo: 'andrea@agrodirecto.com', rol: 'Administrador' },
 ];
 
-function Usuarios() {
-  const [usuarios] = useState<Usuario[]>(usuariosIniciales);
+// Función que el padre (Usuarios) le pasa al hijo (CardAccion).
+// Cuando el hijo la invoca, el padre reacciona mostrando la acción y el módulo.
+function manejarAccionUsuarios(mensaje: string) {
+  alert(`Módulo: Usuarios\n${mensaje}`);
+  console.log(`[Usuarios] ${mensaje}`);
+}
 
+function Usuarios() {
   return (
     <section className="ad-panel">
       <h2 className="ad-panel__titulo">Usuarios</h2>
@@ -45,6 +51,22 @@ function Usuarios() {
           ))}
         </tbody>
       </table>
+
+      {/* Padre -> Hijo: se envían título, descripción y texto por props */}
+      <div className="ad-cards-accion">
+        <CardAccion
+          titulo="Nuevo usuario"
+          descripcion="Registrar un nuevo usuario en la plataforma."
+          textoBoton="Agregar"
+          onEjecutar={manejarAccionUsuarios}
+        />
+        <CardAccion
+          titulo="Exportar listado"
+          descripcion="Descargar el listado de usuarios en formato CSV."
+          textoBoton="Exportar"
+          onEjecutar={manejarAccionUsuarios}
+        />
+      </div>
     </section>
   );
 }

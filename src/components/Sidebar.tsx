@@ -7,6 +7,9 @@ function Sidebar({ paginaActiva, onCambiarPagina }: SidebarProps) {
   const opciones = [
     { id: 'usuarios', etiqueta: 'Usuarios', icono: '👤' },
     { id: 'productos', etiqueta: 'Productos', icono: '🌽' },
+    { id: 'login', etiqueta: 'Login', icono: '🔐' },
+    { id: 'registro', etiqueta: 'Registro', icono: '📝' },
+    { id: 'inventario', etiqueta: 'Inventario', icono: '📦' },
   ];
 
   return (
