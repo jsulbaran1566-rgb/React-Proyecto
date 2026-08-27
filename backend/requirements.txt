@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+pydantic[email]
+passlib[bcrypt]
+bcrypt==4.0.1
+python-jose[cryptography]
+alembic
+
+# Solo para tests/test_integracion.py, no hace falta para correr la app
+httpx
