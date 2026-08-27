@@ -1,0 +1,573 @@
+/* ================================================
+   PALETA "COSECHA" — colores de marca AgroDirecto
+   Verde bosque (tierra cultivada) + dorado trigo (cosecha)
+   ================================================ */
+:root {
+  --verde-oscuro: #1F4D33;
+  --verde-medio: #2F7A45;
+  --verde-claro: #9FD8A8;
+  --verde-fondo: #EEF5EC;
+
+  --dorado: #C68A2E;
+  --dorado-claro: #F3DFB0;
+  --rojo: #B23A2E;
+
+  --blanco: #ffffff;
+  --papel: #F7F4EC;
+  --gris-claro: #E3DFD3;
+  --gris-texto: #3A362E;
+
+  --radio: 10px;
+  --sombra-card: 0 1px 3px rgba(31, 77, 51, 0.08), 0 1px 2px rgba(31, 77, 51, 0.06);
+  --sombra-card-hover: 0 10px 24px rgba(31, 77, 51, 0.14), 0 2px 6px rgba(31, 77, 51, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--papel);
+  color: var(--gris-texto);
+}
+
+.ad-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- Header ---------- */
+.ad-header {
+  background: linear-gradient(135deg, var(--verde-oscuro) 0%, #16382A 100%);
+  color: var(--blanco);
+  padding: 0 28px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 3px solid var(--dorado);
+  box-shadow: 0 2px 14px rgba(20, 30, 20, 0.22);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Igual que .links-nav / .texto-rol-nav del frontend estático:
+   agrupa el estado de sesión y el botón "Cerrar sesión" a la derecha. */
+.links-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.texto-rol-nav {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+/* Botones, portados de estilo.css (.btn-verde / .btn-borde / .btn-salir)
+   para que se vean igual que en el frontend original. */
+.btn-verde {
+  display: inline-block;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, var(--verde-medio) 0%, var(--verde-oscuro) 130%);
+  color: var(--blanco);
+  padding: 10px 22px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(31, 77, 51, 0.25);
+}
+
+.btn-verde:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(31, 77, 51, 0.32);
+}
+
+.btn-verde:active {
+  transform: translateY(0);
+  filter: brightness(0.97);
+}
+
+.btn-borde {
+  background: transparent;
+  color: var(--verde-oscuro);
+  border: 2px solid var(--verde-medio);
+  box-shadow: none;
+}
+
+.btn-borde:hover {
+  background: var(--verde-fondo);
+  filter: none;
+  color: var(--verde-oscuro);
+}
+
+.btn-salir {
+  background: var(--rojo, #B23A2E);
+  padding: 7px 14px;
+  font-size: 0.85rem;
+}
+
+.btn-salir:hover {
+  background: #8f2c22;
+}
+
+.ad-header__marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ad-header__logo {
+  font-size: 1.6rem;
+}
+
+.ad-header__titulo {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+}
+
+.ad-header__eslogan {
+  margin: 0;
+  color: var(--dorado-claro);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* ---------- Cuerpo (sidebar + contenido) ---------- */
+.ad-app__cuerpo {
+  display: flex;
+  flex: 1;
+}
+
+/* ---------- Sidebar ----------
+   Clases portadas tal cual del frontend estático (agrodirecto-frontend/
+   estilo.css: .sidebar, .perfil-sidebar, .avatar-usuario, .nav-sidebar,
+   .nav-sidebar a.activo) para que los botones se vean igual que en
+   panel_productor.html / panel_admin.html / panel_comprador.html. */
+.sidebar {
+  box-sizing: border-box;
+  width: 230px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, var(--verde-oscuro) 0%, #16382A 100%);
+  padding: 24px 0;
+  border-right: 3px solid var(--dorado);
+  display: flex;
+  flex-direction: column;
+}
+
+.perfil-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 12px;
+  gap: 6px;
+}
+
+.avatar-usuario {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--dorado-claro), var(--dorado));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.perfil-sidebar h4 {
+  color: var(--blanco);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.badge-rol {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.12);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.nav-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 12px;
+}
+
+.nav-sidebar a {
+  display: block;
+  padding: 11px 16px;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-size: 0.88rem;
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+
+.nav-sidebar a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--blanco);
+}
+
+.nav-sidebar a.activo {
+  background: rgba(198, 138, 46, 0.22);
+  color: var(--blanco);
+  border-left-color: var(--dorado);
+  font-weight: 600;
+}
+
+/* ---------- Contenido principal ---------- */
+.ad-app__contenido {
+  flex: 1;
+  padding: 24px 32px;
+}
+
+.ad-panel__titulo {
+  margin: 0 0 4px;
+  color: var(--verde-oscuro);
+}
+
+.ad-panel__descripcion {
+  margin: 0 0 20px;
+  color: #6b6558;
+}
+
+/* ---------- Tabla (Usuarios) ---------- */
+.ad-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--blanco);
+  border-radius: var(--radio);
+  overflow: hidden;
+  box-shadow: var(--sombra-card);
+}
+
+.ad-tabla th {
+  background-color: var(--verde-medio);
+  color: var(--blanco);
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+}
+
+.ad-tabla td {
+  padding: 12px 16px;
+  border-top: 1px solid var(--gris-claro);
+}
+
+.ad-tabla tr:hover td {
+  background-color: var(--verde-fondo);
+}
+
+.ad-etiqueta {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--blanco);
+  background-color: var(--verde-medio);
+}
+
+.ad-etiqueta--productor {
+  background-color: var(--verde-medio);
+}
+
+.ad-etiqueta--comprador {
+  background-color: var(--dorado);
+}
+
+.ad-etiqueta--administrador {
+  background-color: var(--verde-oscuro);
+}
+
+/* ---------- Tarjetas (Productos) ---------- */
+.ad-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.ad-tarjeta {
+  background-color: var(--blanco);
+  border-radius: var(--radio);
+  padding: 18px;
+  box-shadow: var(--sombra-card);
+  border-top: 4px solid var(--dorado);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.ad-tarjeta:hover {
+  box-shadow: var(--sombra-card-hover);
+  transform: translateY(-2px);
+}
+
+.ad-tarjeta__nombre {
+  margin: 0 0 6px;
+  color: var(--verde-oscuro);
+}
+
+.ad-tarjeta__categoria {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--verde-medio);
+  background-color: var(--verde-fondo);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.ad-tarjeta__precio {
+  margin: 0;
+  font-weight: 700;
+  color: var(--dorado);
+  font-size: 1.05rem;
+}
+
+/* ---------- Etiquetas de Inventario ---------- */
+.ad-etiqueta--inv-disponible {
+  background-color: var(--verde-medio);
+}
+
+.ad-etiqueta--inv-bajo {
+  background-color: var(--dorado);
+}
+
+.ad-etiqueta--inv-agotado {
+  background-color: var(--rojo, #B23A2E);
+}
+
+/* ---------- Etiquetas de Reservas ---------- */
+.ad-etiqueta--reserva-pendiente {
+  background-color: var(--dorado);
+}
+
+.ad-etiqueta--reserva-confirmada {
+  background-color: var(--verde-medio);
+}
+
+.ad-etiqueta--reserva-pagada {
+  background-color: var(--verde-oscuro);
+}
+
+.ad-etiqueta--reserva-en-tránsito,
+.ad-etiqueta--reserva-en-transito {
+  background-color: #3D6FB4;
+}
+
+.ad-etiqueta--reserva-entregada {
+  background-color: var(--verde-medio);
+}
+
+.ad-etiqueta--reserva-calificada {
+  background-color: var(--verde-oscuro);
+}
+
+.ad-etiqueta--reserva-cancelada {
+  background-color: var(--rojo, #B23A2E);
+}
+
+/* ---------- Etiquetas de Entregas ---------- */
+.ad-etiqueta--entrega-preparando {
+  background-color: var(--dorado);
+}
+
+.ad-etiqueta--entrega-en-camino {
+  background-color: #3D6FB4;
+}
+
+.ad-etiqueta--entrega-entregada {
+  background-color: var(--verde-medio);
+}
+
+/* ---------- Etiquetas de Pagos ---------- */
+.ad-etiqueta--pago-pendiente {
+  background-color: var(--dorado);
+}
+
+.ad-etiqueta--pago-aprobado {
+  background-color: var(--verde-medio);
+}
+
+.ad-etiqueta--pago-rechazado {
+  background-color: var(--rojo, #B23A2E);
+}
+
+/* ---------- Etiquetas de Disputas ---------- */
+.ad-etiqueta--disputa-abierta {
+  background-color: var(--rojo, #B23A2E);
+}
+
+.ad-etiqueta--disputa-en-revisión,
+.ad-etiqueta--disputa-en-revision {
+  background-color: var(--dorado);
+}
+
+.ad-etiqueta--disputa-resuelta {
+  background-color: var(--verde-medio);
+}
+
+.ad-etiqueta--disputa-cerrada {
+  background-color: var(--gris-claro);
+  color: var(--gris-texto);
+}
+
+/* ---------- Etiquetas de Notificaciones ---------- */
+.ad-etiqueta--notif-nueva {
+  background-color: var(--dorado);
+}
+
+.ad-etiqueta--notif-leida {
+  background-color: var(--gris-claro);
+  color: var(--gris-texto);
+}
+
+/* ---------- CardAccion (componente hijo reutilizable) ---------- */
+.ad-cards-accion {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.ad-card-accion {
+  background-color: var(--verde-fondo);
+  border: 1px solid var(--verde-claro);
+  border-radius: var(--radio);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ad-card-accion__titulo {
+  margin: 0;
+  color: var(--verde-oscuro);
+  font-size: 1rem;
+}
+
+.ad-card-accion__descripcion {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b6558;
+  flex: 1;
+}
+
+.ad-card-accion__boton {
+  align-self: flex-start;
+  border: none;
+  border-radius: var(--radio);
+  padding: 8px 16px;
+  background-color: var(--dorado);
+  color: var(--blanco);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.ad-card-accion__boton:hover {
+  background-color: var(--verde-medio);
+}
+
+/* ---------- Formularios (Login / Registro) ---------- */
+.ad-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 360px;
+  background-color: var(--blanco);
+  padding: 20px;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-card);
+}
+
+.ad-formulario__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--gris-texto);
+  font-weight: 600;
+}
+
+.ad-formulario__campo input,
+.ad-formulario__campo select {
+  font: inherit;
+  padding: 9px 10px;
+  border: 1px solid var(--gris-claro);
+  border-radius: var(--radio);
+  background-color: var(--papel);
+  color: var(--gris-texto);
+}
+
+.ad-formulario__campo input:focus,
+.ad-formulario__campo select:focus {
+  outline: 2px solid var(--verde-medio);
+  outline-offset: 1px;
+}
+
+.ad-boton-primario {
+  align-self: flex-start;
+  border: none;
+  border-radius: var(--radio);
+  padding: 10px 20px;
+  background-color: var(--verde-oscuro);
+  color: var(--blanco);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.ad-boton-primario:hover {
+  background-color: var(--verde-medio);
+}
+
+/* ---------- Estado de carga / error ---------- */
+.ad-estado {
+  padding: 14px 16px;
+  border-radius: var(--radio);
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.ad-estado--cargando {
+  background-color: var(--verde-fondo);
+  color: var(--verde-oscuro);
+}
+
+.ad-estado--error {
+  background-color: #FBE9E7;
+  color: #8C2D22;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* ---------- Footer ---------- */
+.ad-footer {
+  background-color: var(--verde-oscuro);
+  color: var(--gris-claro);
+  text-align: center;
+  padding: 14px;
+  font-size: 0.85rem;
+}
