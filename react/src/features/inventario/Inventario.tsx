@@ -1,109 +1,53 @@
-import { Component } from 'react';
-import CardAccion from '../../components/CardAccion';
-import EstadoCarga from '../../components/EstadoCarga';
-import { obtenerLotes } from '../../api/lotesApi';
-import type { Lote } from '../../api/lotesApi';
-import { obtenerMensajeError } from '../../api/httpClient';
+import { useState } from 'react';
 
-interface InventarioState {
-  lotes: Lote[];
-  cargando: boolean;
-  error: string | null;
+interface LoteInventario {
+  id: number;
+  producto: string;
+  categoria: string;
+  disponibleKg: number;
+  estado: 'Disponible' | 'Bajo Stock' | 'Agotado';
 }
 
-function calcularDisponible(lote: Lote): number {
-  return lote.cantidad - lote.kg_reservados;
-}
+export const Inventario = () => {
+  const [inventario] = useState<LoteInventario[]>([
+    { id: 101, producto: 'Papa Sabanera', categoria: 'Tubérculos', disponibleKg: 450, estado: 'Disponible' },
+    { id: 102, producto: 'Zanahoria', categoria: 'Hortalizas', disponibleKg: 30, estado: 'Bajo Stock' },
+    { id: 103, producto: 'Cebolla Larga', categoria: 'Hortalizas', disponibleKg: 0, estado: 'Agotado' },
+  ]);
 
-function calcularEstado(lote: Lote): 'Disponible' | 'Bajo' | 'Agotado' {
-  const disponible = calcularDisponible(lote);
-  if (disponible <= 0) return 'Agotado';
-  if (disponible < lote.cantidad * 0.2) return 'Bajo';
-  return 'Disponible';
-}
+  return (
+    <section className="ad-panel">
+      <h2 className="ad-panel__titulo">Detalle de Registros: Tabla Inventario</h2>
+      <p className="ad-panel__descripcion">Existencias actuales y disponibilidad de lotes en bodega.</p>
 
-// Sin hooks: componente de clase. La existencia disponible se deriva de
-// cantidad - kg_reservados de cada lote (GET /lotes).
-class Inventario extends Component<Record<string, never>, InventarioState> {
-  state: InventarioState = {
-    lotes: [],
-    cargando: true,
-    error: null,
-  };
-
-  componentDidMount() {
-    this.cargarInventario();
-  }
-
-  cargarInventario = () => {
-    this.setState({ cargando: true, error: null });
-    obtenerLotes()
-      .then((lotes) => this.setState({ lotes, cargando: false }))
-      .catch((error) => this.setState({ error: obtenerMensajeError(error), cargando: false }));
-  };
-
-  manejarAccionInventario = (mensaje: string) => {
-    alert(`Módulo: Inventario\n${mensaje}`);
-    console.log(`[Inventario] ${mensaje}`);
-  };
-
-  render() {
-    const { lotes, cargando, error } = this.state;
-
-    return (
-      <section className="ad-panel">
-        <h2 className="ad-panel__titulo">Inventario</h2>
-        <p className="ad-panel__descripcion">
-          Existencias disponibles por lote (cantidad − kg reservados).
-        </p>
-
-        <EstadoCarga cargando={cargando} error={error} onReintentar={this.cargarInventario} />
-
-        {!cargando && !error && (
-          <table className="ad-tabla">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Disponible</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lotes.map((lote) => {
-                const estado = calcularEstado(lote);
-                return (
-                  <tr key={lote.id}>
-                    <td>{lote.producto}</td>
-                    <td>{calcularDisponible(lote)} kg</td>
-                    <td>
-                      <span className={`ad-etiqueta ad-etiqueta--inv-${estado.toLowerCase()}`}>
-                        {estado}
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
-
-        <div className="ad-cards-accion">
-          <CardAccion
-            titulo="Reabastecer stock"
-            descripcion="Generar una orden de reabastecimiento para los productos bajos o agotados."
-            textoBoton="Reabastecer"
-            onEjecutar={this.manejarAccionInventario}
-          />
-          <CardAccion
-            titulo="Generar reporte"
-            descripcion="Exportar el estado actual del inventario en PDF."
-            textoBoton="Generar"
-            onEjecutar={this.manejarAccionInventario}
-          />
-        </div>
-      </section>
-    );
-  }
-}
+      <table className="ad-tabla">
+        <thead>
+          <tr>
+            <th>Código Lote</th>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Disponible (Kg)</th>
+            <th>Estado Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inventario.map((item) => (
+            <tr key={item.id}>
+              <td>#{item.id}</td>
+              <td>{item.producto}</td>
+              <td>{item.categoria}</td>
+              <td>{item.disponibleKg} kg</td>
+              <td>
+                <span className={ad-etiqueta ad-etiqueta--${item.estado.toLowerCase().replace(' ', '-')}}>
+                  {item.estado}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
+};
 
 export default Inventario;
